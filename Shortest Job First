@@ -1,0 +1,40 @@
+// SJF algorithms - 
+#include <stdio.h>
+
+int main() {
+
+    int n;
+    printf("Enter the no of processes");
+    scanf("%d",&n);
+
+    int bt[n];
+    printf("Enter the burst time of the processes");
+    for(int i=0;i<n;i++){   
+        scanf("%d",&bt[i]);
+    }
+    int wt[n], tat[n];
+    wt[0]=0;
+
+    for(int i =1; i<n; i++){
+       wt[i]=wt[i-1]+bt[i-1];
+    }
+
+    // for loop for the tat
+    for(int i=0; i<n ; i++){
+        tat[i] = bt[i] + wt[i];
+    }
+    int total_wt=0,total_tat=0;
+    for(int i=0;i<n;i++){
+         total_wt+=wt[i];
+         total_tat+=tat[i];
+    }
+    printf("\nProcess\t\Brust Time\tW Time\tTAT\n");
+     for(int i=0;i<n;i++){
+         printf("%d\t%d\t\t%d\t\t%d\n",i+1,bt[i],wt[i],tat[i]);
+    }
+    float avg_wt =(float)total_wt/n;
+    float avg_tat =(float)total_tat/n;
+    printf("total wt : %d\n",total_wt);
+    printf("Avg wt : %f",avg_wt);
+
+}
